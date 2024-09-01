@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep_Fake_Identifier</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      header {
+        height: 70px;
+        border-bottom: 2px solid rgb(240, 232, 232);
+        padding-top: 10px;
+      }
+      header img {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin: 0px 10px 0px 10px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .start {
+        margin: 20px 0px 15px 30px;
+      }
+      .upload_tag {
+        color: gray;
+        margin: -5px 0px -10px 30px;
+      }
+      input[type="file"] {
+        width: 400px; /* Increase width to 400px */
+        background-color: transparent; /* Transparent background */
+        border: 2px solid #ccc; /* Optional: Add a border for better visibility */
+        padding: 5px; /* Add some padding for a better look */
+        border-radius: 4px; /* Rounded corners for a smooth look */
+        color: #333; /* Text color */
+        font-family: inherit; /* Inherit font from parent */
+        cursor: pointer; /* Change cursor to pointer for a better UX */
+      }
+
+      input[type="file"]::-webkit-file-upload-button {
+        background-color: rgb(182, 113, 228); /* Customize button color */
+        color: white; /* Button text color */
+        padding: 5px 10px; /* Button padding */
+        border: none; /* Remove default border */
+        border-radius: 4px; /* Rounded button corners */
+        cursor: pointer; /* Pointer cursor for button */
+      }
+
+      input[type="file"]::-webkit-file-upload-button:hover {
+        background-color: #a662d1; /* Darken button on hover */
+      }
+
+      input[type="submit"] {
+        background-color: rgb(182, 113, 228); /* Same color as 'Choose File' button */
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px; /* Add some margin for spacing */
+      }
+
+      input[type="submit"]:hover {
+        background-color: #a662d1; /* Darken button on hover */
+      }
+
+      form {
+        margin: 10px 0px 0px 30px;
+      }
+
+      .child {
+        width: 50%;
+      }
+     .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+     }
+      .prediction {
+        margin: 10px 0px 15px 30px;
+      }
+
+      #videoPreview {
+        display: none; /* Hide video element initially */
+        margin: 20px 30px;
+        width: 70%;
+        height: 230px;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          flex-direction: column;
+        }
+        .child {
+          width: 95%;
+        }
+        input[type="file"] {
+          width: 90%;
+        }
+        input[type="submit"] {
+          font-size: 13px;
+        }
+        #videoPreview{
+          margin: 2px 10px;
+          width: 80%;
+          margin: auto;
+        }
+        input[type="file"] {
+          width: 240px; /* Increase width to 400px */
+          
+        }
+        input[type="submit"]{
+          font-size: 17px;
+        }
+        
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/17613/17613319.png"
+          alt=""
+        />
+        <span><h1>VideoInsight</h1></span>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="child">
+        <h2 class="start">Analyze Your video with AI</h2>
+        <p class="upload_tag">Upload the video here</p>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="vedio" id="videoFile" onchange="previewVideo()" />
+          <input type="submit" value="Upload" />
+        </form>
+
+        <!-- Video Preview Area -->
+        <video id="videoPreview" controls></video>
+      </div>
+
+      <div class="child">
+        <h2 class="prediction">Prediction Result</h2>
+      </div>
+    </div>
+
+    <script>
+      function previewVideo() {
+        const fileInput = document.getElementById('videoFile');
+        const videoPreview = document.getElementById('videoPreview');
+        const file = fileInput.files[0];
+
+        if (file) {
+          const fileURL = URL.createObjectURL(file);
+          videoPreview.src = fileURL;
+          videoPreview.style.display = 'block'; // Show the video element
+        } else {
+          videoPreview.style.display = 'none'; // Hide the video element if no file is selected
+        }
+      }
+    </script>
+  </body>
+</html>
